@@ -5,7 +5,7 @@ m_ProjectFiles:
     m_ContentTrackingEnabled: 1
     m_ModificationDate:
       serializedVersion: 2
-      ticks: 637722480812621182
+      ticks: 637722499999557019
     m_Hash: 1206723745
   m_LockFileStatus:
     m_FilePath: C:/Users/Ian/Desktop/TEC/Semestre_5/Graficas/sistemas_agentes/ProyectoCoche/Packages/packages-lock.json
@@ -13,7 +13,7 @@ m_ProjectFiles:
     m_ContentTrackingEnabled: 1
     m_ModificationDate:
       serializedVersion: 2
-      ticks: 637722481049361968
+      ticks: 637722500147177737
     m_Hash: 3682739031
 m_EmbeddedPackageManifests:
   m_ManifestsStatus: {}
@@ -2834,4 +2834,4 @@ m_PackageAssets:
   m_LocalPackages:
     m_LocalFileStatus: []
 m_ProjectPath: C:/Users/Ian/Desktop/TEC/Semestre_5/Graficas/sistemas_agentes/ProyectoCoche/Packages
-m_EditorVersion: 2020.3.21f1 (a38c86f6690f)
+m_EditorVersion: 2020.3.22f1 (e1a7f79fd887)
