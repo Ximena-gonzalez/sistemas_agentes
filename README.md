@@ -7,6 +7,7 @@ Ximena González Ibarra A01028604
 
 ## Para correr
 Utiliza python para correr el archivo serverUnity.py dentro del folder mesa
+
 Corre el proyecto de Unity
 
 ### Diagramas de Clases:
