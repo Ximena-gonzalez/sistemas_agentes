@@ -29,6 +29,7 @@ class Robot(Agent):
         self.direction = 4
         self.condition = "NoBox"
         self.moves = 0
+        self.box = None
 
     def boxNeighbor(self):
         possible_steps = self.model.grid.get_neighbors(
@@ -37,9 +38,22 @@ class Robot(Agent):
             include_center=False)
         for agent in possible_steps:
             if(isinstance(agent, Box)):
-                return agent.pos
+                if(agent.condition != "Goal"):
+                    return agent.pos
             else:
                 return False
+
+    def canGrab(self):
+        possible_steps = self.model.grid.get_neighbors(
+            self.pos,
+            moore=False, # Boolean for whether to use Moore neighborhood (including diagonals) or Von Neumann (only up/down/left/right).
+            include_center=False)
+        for agent in possible_steps:
+            if(isinstance(agent, Box)):
+                if(agent.condition != "Goal"):
+                    return True
+        return False
+
 
     def robotN(self):
         posList = []
@@ -83,6 +97,7 @@ class Robot(Agent):
             pass
         else:
             self.model.grid.move_agent(self, possible_steps[self.direction])
+            
 
     def randomMoveObst(self):
         freeSpaces = []
@@ -96,10 +111,12 @@ class Robot(Agent):
 
         for tile in possible_steps:
             if(len(self.model.grid[tile]) <= 0):
-                print(tile)
                 freeSpaces.append(tuple(tile))
 
-        self.model.grid.move_agent(self, random.choice(freeSpaces))
+        space = random.choice(freeSpaces)
+        self.model.grid.move_agent(self, space)
+        if(self.box != None and self.box.condition != "Goal"):
+            self.model.grid.move_agent(self.box, space)
         
 
         
@@ -128,15 +145,19 @@ class Robot(Agent):
             pass
         else:
             self.model.grid.move_agent(self, tuple(newPos))
+            if(self.box.condition != "Goal"):
+                self.model.grid.move_agent(self.box, tuple(newPos))
 
     def grab(self):
         self.condition = "HasBox"
-        self.model.grid[self.boxNeighbor()][0].condition = "Dynamic"
-        self.model.grid.remove_agent(self.model.grid[self.boxNeighbor()][0])
+        self.box = self.model.grid[self.boxNeighbor()][0]
+        self.model.grid.move_agent(self.box, self.pos)
+        self.box.condition = "Dynamic"
 
     def dropBox(self):
         self.condition = "NoBox"
-        self.model.createBox()
+        self.box.condition = "Goal"
+        self.model.grid.move_agent(self.box, self.model.destination)
      
 
     def step(self):
@@ -146,6 +167,7 @@ class Robot(Agent):
         distY = self.model.destination[1] - self.pos[1]
         self.direction = self.random.randrange(0,4)
         if(self.condition == "HasBox" and (self.pos == (0,1) or self.pos == (1,0))):
+            print("Tengo caja y la voy a dejar en dest")
             self.dropBox()
         elif(self.condition == "HasBox" and self.noObst()): #Si tienes caja y no hay obstaculos
             print("Tengo caja y no hay obstaculo")
@@ -153,14 +175,17 @@ class Robot(Agent):
                 self.destMove("x",distX)
             else:
                 self.destMove("y",distY)
-        elif(self.condition != "HasBox" and self.boxNeighbor() and self.model.grid[self.boxNeighbor()][0].condition != "Goal"): #Si no tienes caja y hay caja cerca de ti
+        elif(self.condition != "HasBox" and self.boxNeighbor() and self.canGrab()): #Si no tienes caja y hay caja cerca de ti
+            print("No tengo caja y si puedo agarrar una")
             self.grab()
         elif(self.condition != "HasBox" and (not self.noObst())): #Si no tienes caja y si hay obstaculos en tu camino
+            print("No tengo caja y si hay obstaculo")
             self.randomMoveObst()
         elif(not self.noObst()): #Si tienes caja y si hay obstaculos en tu camino
             self.randomMoveObst()
             print("Tengo caja y si hay obstaculo")
         else:  #Si algo llega a pasar de la jerarquia
+            print("Reached else")
             self.randomMove()
         self.moves += 1
 

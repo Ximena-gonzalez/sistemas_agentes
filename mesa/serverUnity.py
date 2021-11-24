@@ -17,7 +17,7 @@ def default():
 
 @app.route("/config", methods=['POST'])
 def configure():
-    global num_agents,width,height,num_boxes,robotModel
+    global num_agents,width,height,num_boxes,maximum_time,robotModel
     num_agents = int(request.form.get("numAgents"))
     print(f"Recieved num_agents = {num_agents}")
     width = int(request.form.get("gridWidth"))
@@ -26,7 +26,9 @@ def configure():
     print(f"Recieved height = {height}")
     num_boxes = int(request.form.get("numBoxes"))
     print(f"Recieved num_boxes = {num_boxes}")
-    robotModel = RobotModel(num_agents,width,height,num_boxes)
+    maximum_time = int(request.form.get("maximumTime"))
+    print(f"Recieved maximum_time = {maximum_time}")
+    robotModel = RobotModel(num_agents,width,height,num_boxes,maximum_time)
     return jsonify({"OK": num_agents})
 
 @app.route("/update", methods=['GET'])

@@ -27,12 +27,13 @@ public class AgentController : MonoBehaviour
     [SerializeField] int gridWidth;
     [SerializeField] int gridHeight;
     [SerializeField] int numBoxes;
+    [SerializeField] int maximumTime;
     Agents agents;
     GameObject[] robots;
     GameObject[] boxes;
     float updateTime = 0;
     bool isFinished = false;
-    int finishCounter = 5;
+    int finishCounter = 30;
 
     // Start is called before the first frame update
     void Start()
@@ -126,6 +127,7 @@ public class AgentController : MonoBehaviour
         form.AddField("gridWidth", gridWidth.ToString());
         form.AddField("gridHeight", gridHeight.ToString());
         form.AddField("numBoxes", numBoxes.ToString());
+        form.AddField("maximumTime", maximumTime.ToString());
         UnityWebRequest www = UnityWebRequest.Post(url + configEP, form);
         yield return www.SendWebRequest();
 

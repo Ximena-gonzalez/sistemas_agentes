@@ -14,7 +14,7 @@ class RobotModel(Model):
         N: Number of agents in the simulation
         height, width: The size of the grid to model
     """
-    def __init__(self, N, width, height, B):
+    def __init__(self, N, width, height, B, maximum_time):
         self.num_agents = N
         self.num_boxes = B
         self.boxCounter = 1
@@ -22,6 +22,7 @@ class RobotModel(Model):
         self.schedule = RandomActivation(self)
         self.running = True 
         self.destination = (0,0)
+        self.maximum_time = maximum_time
         self.start_time = time.time()
         self.elapsed_time = 0
 
@@ -75,7 +76,7 @@ class RobotModel(Model):
                 boxCount += 1
 
         
-        if (boxCount == 0 and hasBoxCount == 0):
+        if ((boxCount == 0 and hasBoxCount == 0) or self.maximum_time < self.elapsed_time):
             print("Amount of moves made by Robot[s]: " + str(self.moves_made(self)))
             self.running = False
             print("Time on run finish: " + str(round(self.elapsed_time, 2)) + " seconds.")
