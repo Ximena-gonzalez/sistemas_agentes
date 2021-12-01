@@ -9,6 +9,12 @@ public class Agents
     public List<int> objType;
 }
 
+public class Semaforos
+{
+    public List<Vector3> positions;
+    public List<bool> states;
+}
+
 public class RunHandler
 {
     public string message;
@@ -18,33 +24,36 @@ public class AgentController : MonoBehaviour
     [SerializeField] string url;
     [SerializeField] string configEP;
     [SerializeField] string updateEP;
-    [SerializeField] string robotEP;
-    [SerializeField] string boxEP;
+    [SerializeField] string carEP;
+    [SerializeField] string trafficEP;
     [SerializeField] int numAgents;
-    [SerializeField] GameObject robotPrefab;
-    [SerializeField] GameObject boxPrefab;
+    [SerializeField] GameObject carPrefab;
+    [SerializeField] GameObject semPrefab;
     [SerializeField] float updateDelay;
-    [SerializeField] int gridWidth;
-    [SerializeField] int gridHeight;
-    [SerializeField] int numBoxes;
-    [SerializeField] int maximumTime;
     Agents agents;
-    GameObject[] robots;
-    GameObject[] boxes;
-    float updateTime = 0;
+    Semaforos semaforos;
+    GameObject[] cars;
+    GameObject[] semaforoList;
+
+    public float updateTime = 0;
     bool isFinished = false;
     int finishCounter = 30;
-
+    List<Vector3> oldPositions;
+    List<Vector3> newPositions;
+    public float dt;
+    bool hold = false;
     // Start is called before the first frame update
     void Start()
     {
-        robots = new GameObject[numAgents];
+        oldPositions = new List<Vector3>();
+        newPositions = new List<Vector3>();
+        cars = new GameObject[numAgents];
+        semaforoList = new GameObject[24];
         for (int i = 0; i < numAgents; i++){
-            robots[i] = Instantiate(robotPrefab, Vector3.zero, Quaternion.identity);
+            cars[i] = Instantiate(carPrefab, Vector3.zero, Quaternion.identity);
         }
-        boxes = new GameObject[numBoxes];
-        for (int i = 0; i < numBoxes; i++){
-            boxes[i] = Instantiate(boxPrefab, Vector3.zero, Quaternion.identity);
+        for (int i = 0; i < 24; i++){
+            semaforoList[i] = Instantiate(semPrefab, Vector3.zero, Quaternion.identity);
         }
         StartCoroutine(SendConfiguration());
     }
@@ -52,30 +61,34 @@ public class AgentController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {   
+        float t = updateTime/updateDelay;
+        dt = t * t * (3f - 2f*t);
             if(!isFinished || finishCounter > 0){
-                Debug.Log("Entered update");
                 if(updateTime > updateDelay){
+                    hold = true;
                     StartCoroutine(UpdatePositions());
-                    StartCoroutine(UpdateRobotPositions());
-                    StartCoroutine(UpdateBoxPositions());
                     updateTime = 0;
                 }
                 updateTime += Time.deltaTime;
             }
+            if (!hold)
+        {
+            
+            for (int s = 0; s < cars.Length; s++)
+            {
+                Vector3 interpolated = Vector3.Lerp(oldPositions[s], newPositions[s], dt);
+                cars[s].transform.localPosition = interpolated;
+                
+                Vector3 dir = oldPositions[s] - newPositions[s];
+                cars[s].transform.rotation = Quaternion.LookRotation(dir);
+                
+            }
             if(isFinished){finishCounter -= 1;}
+            
+    }
+    
     }
 
-    IEnumerator TestAPI()
-    {
-        UnityWebRequest www = UnityWebRequest.Get(url + "/");
-        yield return www.SendWebRequest();
-
-        if(www.result == UnityWebRequest.Result.Success){
-            Debug.Log(www.downloadHandler.text);
-        } else {
-            Debug.Log(www.error);
-        }
-    }
 
     IEnumerator UpdatePositions()
     {
@@ -88,46 +101,56 @@ public class AgentController : MonoBehaviour
             if(handler.message == "Finished"){
                 isFinished = true;
             }
+            StartCoroutine(UpdateCarPositions());
+            StartCoroutine(UpdateTrafficLights());
         } else {
             Debug.Log(www.error);
         }
+
     }
-    IEnumerator UpdateRobotPositions()
+    IEnumerator UpdateCarPositions()
     {
-        UnityWebRequest www = UnityWebRequest.Get(url + robotEP);
+        UnityWebRequest www = UnityWebRequest.Get(url + carEP);
         yield return www.SendWebRequest();
 
         if(www.result == UnityWebRequest.Result.Success){
             //Debug.Log(www.downloadHandler.text);
             agents = JsonUtility.FromJson<Agents>(www.downloadHandler.text);
-            MoveRobots();
+
+            // Store the old positions for each agent
+            oldPositions = new List<Vector3>(newPositions);
+
+            newPositions.Clear();
+
+            foreach(Vector3 v in agents.positions)
+                newPositions.Add(v);
+
+            hold = false;
         } else {
             Debug.Log(www.error);
         }
     }
 
-    IEnumerator UpdateBoxPositions()
+    IEnumerator UpdateTrafficLights()
     {
-        UnityWebRequest www = UnityWebRequest.Get(url + boxEP);
+        UnityWebRequest www = UnityWebRequest.Get(url + trafficEP);
         yield return www.SendWebRequest();
 
         if(www.result == UnityWebRequest.Result.Success){
-            Debug.Log(www.downloadHandler.text);
-            agents = JsonUtility.FromJson<Agents>(www.downloadHandler.text);
-            MoveBoxes();
+            //Debug.Log(www.downloadHandler.text);
+            semaforos = JsonUtility.FromJson<Semaforos>(www.downloadHandler.text);
+            MoveSem();
+            
         } else {
             Debug.Log(www.error);
         }
     }
 
+    
     IEnumerator SendConfiguration()
     {
         WWWForm form = new WWWForm();
         form.AddField("numAgents", numAgents.ToString());
-        form.AddField("gridWidth", gridWidth.ToString());
-        form.AddField("gridHeight", gridHeight.ToString());
-        form.AddField("numBoxes", numBoxes.ToString());
-        form.AddField("maximumTime", maximumTime.ToString());
         UnityWebRequest www = UnityWebRequest.Post(url + configEP, form);
         yield return www.SendWebRequest();
 
@@ -138,17 +161,13 @@ public class AgentController : MonoBehaviour
         }
     }
 
-    void MoveRobots()
+    void MoveSem()
     {
-        for(int i = 0; i < numAgents; i++){
-            robots[i].transform.position = agents.positions[i];
+        for (int i=0; i<24; i++) {
+            semaforoList[i].transform.position = semaforos.positions[i];
+            semaforoList[i].GetComponent<SemaforoLight>().toggleLight(semaforos.states[i]);
+            Debug.Log(semaforos.states[i]);
         }
-    }
-
-    void MoveBoxes()
-    {
-        for(int i = 0; i < numBoxes; i++){
-            boxes[i].transform.position = agents.positions[i];
-        }
+        
     }
 }

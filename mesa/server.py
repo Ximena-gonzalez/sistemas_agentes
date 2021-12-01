@@ -30,7 +30,7 @@ def agent_portrayal(agent):
 
     return portrayal
 
-model_params = {"N":1, "width":10, "height":10, "B":2}
+model_params = {"N":1, "width":10, "height":10, "B":2, "maximum_time":30}
 grid = CanvasGrid(agent_portrayal, 10, 10, 500, 500)
 server = ModularServer(RobotModel, [grid], "Robot Sim", model_params)
                        

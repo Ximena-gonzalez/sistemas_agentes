@@ -712,16 +712,13 @@ MonoBehaviour:
   url: http://127.0.0.1:5000
   configEP: /config
   updateEP: /update
-  robotEP: /getRobots
-  boxEP: /getBoxes
-  numAgents: 5
-  robotPrefab: {fileID: 9177356729377206388, guid: 84d24b1e6783e174cba4fe48dd87e976, type: 3}
-  boxPrefab: {fileID: 4903491237856506818, guid: 326160f0344a09441a3963f4355e083c, type: 3}
-  updateDelay: 0.1
-  gridWidth: 10
-  gridHeight: 10
-  numBoxes: 10
-  maximumTime: 120
+  carEP: 
+  numAgents: 3
+  carPrefab: {fileID: 0}
+  updateDelay: 0.2
+  timeToUpdate: 5
+  timer: 0
+  dt: 0
 --- !u!4 &1481940989
 Transform:
   m_ObjectHideFlags: 0
