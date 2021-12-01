@@ -8,6 +8,10 @@ limit = 5
 robotModel = None
 currentStep = 0
 
+
+def sortByID(e):
+    return e['id']
+
 app = Flask("Test Server")
 
 @app.route("/")
@@ -44,16 +48,19 @@ def updateModel():
 
 @app.route("/getRobots", methods=['GET'])
 def update_points_robots():
-    print(list(robotModel.grid.coord_iter()))
-    points = [{"x": x, "y":1, "z":z} for (a, x, z) in robotModel.grid.coord_iter() for b in a if isinstance(b, Robot)]
-    print(f"Points: {points}")
-    return jsonify({"positions": points})
+    #print(list(robotModel.grid.coord_iter()))
+    points = [{"x": x, "y":1, "z":z, "id":b.unique_id} for (a, x, z) in robotModel.grid.coord_iter() for b in a if isinstance(b, Robot)]
+    #print(f"Points: {points}")
+    points.sort(key=sortByID)
+    sorted_points = [{"x": i["x"], "y":1, "z":i["z"]} for i in points]
+    print(sorted_points)
+    return jsonify({"positions": sorted_points})
 
 @app.route("/getBoxes", methods=['GET'])
 def update_points_boxes():
-    print(list(robotModel.grid.coord_iter()))
+    #print(list(robotModel.grid.coord_iter()))
     points = [{"x": x, "y":1, "z":z} for (a, x, z) in robotModel.grid.coord_iter() for b in a if isinstance(b, Box)]
-    print(f"Points: {points}")
+    #print(f"Points: {points}")
     return jsonify({"positions": points})
 
 app.run()
