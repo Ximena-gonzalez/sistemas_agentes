@@ -15,30 +15,16 @@ Corre el proyecto de Unity
 | Atributos | Métodos   |
 |-----------|:---------:|
 
-Condition (String: HasBox, NoBox)
-boxNeighbor(self) - checa vecinos y si uno es caja regresa su posición como tupla
-Direction (Int: 0-4)
-canGrab(self) - checa vecinos y si uno es caja que no tenga condición “Goal” regresa True
-Moves (Int)
-robotN(self) - checa vecinos y si uno es robot regresa su posición como tupla
-Box (Box Agent)
-noObst(self) - checa vecinos y si está completamente libre de agentes regresa True
-Position (Tupla)
-randomMove(self) - mueve al agente a otra parte del grid dependiendo en su atributo Direction
-No regresa algo
+| Condition (String: HasBox, NoBox)  | boxNeighbor(self) - checa vecinos y si uno es caja regresa su posición como tupla |
+| Direction (Int: 0-4) | canGrab(self) - checa vecinos y si uno es caja que no tenga condición “Goal” regresa True |
+| Moves (Int) | robotN(self) - checa vecinos y si uno es robot regresa su posición como tupla |
+| Box (Box Agent) | noObst(self) - checa vecinos y si está completamente libre de agentes regresa True |
+| Position (Tupla) | randomMove(self) - mueve al agente a otra parte del grid dependiendo en su atributo Direction. No regresa algo |
 
-
-randomMoveObst(self) - mueve al agente de forma aleatoria (solo a espacios vecinos sin agentes presente) No regresa algo
-
-
-destMove(self, xOY, dist) - mueve al agente hacia una coordenada destination dependiendo en los variables xOY y dist 
-No regresa algo
-
-
-grab(self) - cambia la condición self.condition a “HasBox” y mueve el agente de Caja a la posición de self.pos, también le asigna a self.box el agente de Caja y le cambia la condición de esa caja a “Dynamic”
-
-
-dropBox(self) - cambia la condición self.condition a “NoBox”, cambia la condición de self.box.condition a “Goal” y mueve self.box a la posición de destination
+| | randomMoveObst(self) - mueve al agente de forma aleatoria (solo a espacios vecinos sin agentes presente) No regresa algo |
+| | destMove(self, xOY, dist) - mueve al agente hacia una coordenada destination dependiendo en los variables xOY y dist.No regresa algo |
+| | grab(self) - cambia la condición self.condition a “HasBox” y mueve el agente de Caja a la posición de self.pos, también le asigna a self.box el agente de Caja y le cambia la condición de esa caja a “Dynamic” |
+| | dropBox(self) - cambia la condición self.condition a “NoBox”, cambia la condición de self.box.condition a “Goal” y mueve self.box a la posición de destination |
 
 
 ## Clase Caja
