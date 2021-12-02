@@ -29,6 +29,9 @@ Tenemos 3 propuestas de mejora para que el modelo funcione de manera mucho más 
 
 
 # Reto: Movilidad Urbana
+## Liga del Video
+Liga al video: https://youtu.be/J5gtHZ_SVpE
+
 ## Diagramas de clase y protocolos de interacción finales.
 Clase Car
 
