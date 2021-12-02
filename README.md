@@ -2,7 +2,9 @@
 ## Equipo 3
 
 Carolina Ortega Barrios A01025254
+
 Ian Seidman Sorsby A01028650
+
 Ximena González Ibarra A01028604
 
 ## Diagramas de Clases:
@@ -46,21 +48,23 @@ Para el protocolo de agentes, se utilizan dos jerarquías, una “mini” jerarq
 *“Mini” Jerarquía*
 
 1.- Si hay un semáforo con luz roja frente a ti: prende tus intermitentes
+
 2.- Si hay un semáforo con luz verde frente a ti y tienes tus intermitentes prendidas o tienes tus intermitentes prendidas y no hay nadie frente a ti con intermitentes prendidas: apaga tus intermitentes
+
 3.- Si tienes coches frente a ti con intermitentes prendidas: prende tus intermitentes
 
 *Jerarquía Principal*
 
-Si la condición del agente es diferente de “Goal”
-Si el coche tiene su intermitente prendida, no se mueve
-Si el destino está en tu rango:se mueve el agente coche al destino y cambia la condición a que llegó al “Goal”
-Checa si hay un semáforo en frente y sea verde, si esto es el caso se mueve dos espacios en la dirección de la calle
-Si el semáforo se encuentra en “Red” el coche tendrá que esperar un turno en su misma posición
-Checa si no hay coches adelante o que lleva esperando más de un turno, y también debe estar en una intersección. Si esto es el caso el coche se mueve hacia su destino, en la dirección que esté más lejos en ese momento.
-Checa si el coche está a 2 celdas en X y en Y del destino: moverá al coche en diagonal al otro carril
-Checa si no hay un coche enfrente y si no hay el coche se mueve dependiendo la dirección de la calle
-Checa si hay un coche enfrente: se espera un turno en la misma posición
-Si no cumple ninguna de las condiciones anteriores se mueve en la dirección de la calle
+1. Si la condición del agente es diferente de “Goal”
+2. Si el coche tiene su intermitente prendida, no se mueve
+3. Si el destino está en tu rango:se mueve el agente coche al destino y cambia la condición a que llegó al “Goal”
+4. Checa si hay un semáforo en frente y sea verde, si esto es el caso se mueve dos espacios en la dirección de la calle
+5. Si el semáforo se encuentra en “Red” el coche tendrá que esperar un turno en su misma posición
+6. Checa si no hay coches adelante o que lleva esperando más de un turno, y también debe estar en una intersección. Si esto es el caso el coche se mueve hacia su destino, en la dirección que esté más lejos en ese momento.
+7. Checa si el coche está a 2 celdas en X y en Y del destino: moverá al coche en diagonal al otro carril
+8. Checa si no hay un coche enfrente y si no hay el coche se mueve dependiendo la dirección de la calle
+9. Checa si hay un coche enfrente: se espera un turno en la misma posición
+10. Si no cumple ninguna de las condiciones anteriores se mueve en la dirección de la calle
 
 *Guía de Instalación*
 
