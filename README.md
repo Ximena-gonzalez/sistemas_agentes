@@ -75,11 +75,11 @@ Unity (Versión 2020.3.22)
 Cloud Foundry CLI
 
 Desde el directorio TrafficBase/code se debe de hacer el deploy a la nube de IBM a través de Cloud Foundry:
-'''
+```
 	- cf login (poner tus credenciales de IBM Cloud)
 	- cf api - <liga de servidor api> (elegir la liga más conveniente por ubicación)
 	- cf push
-'''
+```
 Finalmente, abrir el proyecto de Unity a través del folder “ProyectoCoche” y dentro de la escena BuildCity modificar el SerializeFields de AgentManager, cambiando el variable Url con la liga de tu programa en IBM Cloud
 
 Correr el proyecto en Unity después de iniciar el programa de python en IBM Cloud.
