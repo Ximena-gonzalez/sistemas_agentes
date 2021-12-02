@@ -7,7 +7,7 @@ Ximena González Ibarra A01028604
 
 ## Diagramas de Clases:
 Clase Robot
-TABLA
+![plot](./Images/tablasClaseRobot.png)
 
 Clase Caja
 TABLA
