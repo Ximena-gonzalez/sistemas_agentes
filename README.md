@@ -1,13 +1,13 @@
-#Actividad Integradora: Robots
+# Actividad Integradora: Robots
 
-##Diagramas de Clases:
+## Diagramas de Clases:
 Clase Robot
 TABLA
 
 Clase Caja
 TABLA
 
-###Protocolo de Agentes:
+### Protocolo de Agentes:
 1. Sí el robot tiene caja y se encuentra en alguna de las dos celdas contiguas a la celda destino (o sea (1,0) o (0,1)), el robot deposita la caja en la celda destino (0,0)
 2. Sí el robot tiene caja y no hay algún obstáculo en su camino, se hace una resta de las coordenadas destino menos las coordenadas de las posiciones para que el robot se dirija de forma directa.
 3. Sí el robot no tiene caja, hay una caja en alguna celda y esa caja no tiene como condición “Goal”, el robot debe tomar la caja y llevarla a su misma celda (posición)
@@ -21,8 +21,8 @@ Tenemos 3 propuestas de mejora para que el modelo funcione de manera mucho más 
 3. Lo ideal sería que los robots puedan darle prioridad a los robots que tienen una caja y van al destino, para que así puedan pasar mucho más rápido sin enfrentarse a más obstáculos.
 
 
-#Reto: Movilidad Urbana
-##Diagramas de clase y protocolos de interacción finales.
+# Reto: Movilidad Urbana
+## Diagramas de clase y protocolos de interacción finales.
 Clase Car
 TABLA
 
@@ -43,7 +43,7 @@ Clase Traffic_Light
 TABLA
 
 
-###Protocolo de Agentes
+### Protocolo de Agentes
 Para el protocolo de agentes, se utilizan dos jerarquías, una “mini” jerarquía que se ejecuta antes de la jerarquía principal, esto con el propósito de tener información actual antes de tomar decisiones.
 
 *“Mini” Jerarquía*
