@@ -44,11 +44,13 @@ Clase Car
 Para el protocolo de agentes, se utilizan dos jerarquías, una “mini” jerarquía que se ejecuta antes de la jerarquía principal, esto con el propósito de tener información actual antes de tomar decisiones.
 
 *“Mini” Jerarquía*
+
 1.- Si hay un semáforo con luz roja frente a ti: prende tus intermitentes
 2.- Si hay un semáforo con luz verde frente a ti y tienes tus intermitentes prendidas o tienes tus intermitentes prendidas y no hay nadie frente a ti con intermitentes prendidas: apaga tus intermitentes
 3.- Si tienes coches frente a ti con intermitentes prendidas: prende tus intermitentes
 
 *Jerarquía Principal*
+
 Si la condición del agente es diferente de “Goal”
 Si el coche tiene su intermitente prendida, no se mueve
 Si el destino está en tu rango:se mueve el agente coche al destino y cambia la condición a que llegó al “Goal”
@@ -61,6 +63,7 @@ Checa si hay un coche enfrente: se espera un turno en la misma posición
 Si no cumple ninguna de las condiciones anteriores se mueve en la dirección de la calle
 
 *Guía de Instalación*
+
 Se requiere descargar el zip desde la liga del repositorio “Sistemas_multiagentes” del equipo
 Checar que se tiene instalado lo siguiente en el equipo:
 Python 3.8 
