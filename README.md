@@ -12,8 +12,9 @@ Corre el proyecto de Unity
 
 ### Diagramas de Clases:
 ## Clase Robot
-Atributos
-Métodos
+| Atributos | Métodos   |
+|-----------|:---------:|
+
 Condition (String: HasBox, NoBox)
 boxNeighbor(self) - checa vecinos y si uno es caja regresa su posición como tupla
 Direction (Int: 0-4)
