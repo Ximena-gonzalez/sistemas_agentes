@@ -33,6 +33,7 @@ Condition
 “Static”, “Dynamic” o “Goal”
 Position 
 Tupla de coordenadas
+![plot](./Images/tablasClaseBox.jpg)
 
 
 ## Protocolo de Agentes:
