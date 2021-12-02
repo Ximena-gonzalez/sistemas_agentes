@@ -76,8 +76,6 @@ Desde el directorio TrafficBase/code se debe de hacer el deploy a la nube de IBM
 Finalmente, abrir el proyecto de Unity a través del folder “ProyectoCoche” y dentro de la escena BuildCity modificar el SerializeFields de AgentManager, cambiando el variable Url con la liga de tu programa en IBM Cloud
 Correr el proyecto en Unity después de iniciar el programa de python en IBM Cloud.
 
-*Liga al video:* 
-
 1. *¿Por qué seleccionaron el modelo multiagentes utilizado? (mesa)*
 - Utilizamos el modelo de multiagentes ya que por varios motivos cumplía con los requerimientos necesarios. Primero la librería “mesa” contiene un multigrid en donde se permite que varios agentes se encuentren en la misma posición. Utilizamos la jerarquía de operaciones para que el agente tenga prioridades en la toma de decisiones. Utilizamos varios agentes (coche, piso, edificio, semáforo) ya que todos tenían mínimo una condición que indicaba su estado. Al usar el modelo multiagentes, estos se pueden comunicar entre ellos a la hora de tomar decisiones, con el propósito de maximizar la ejecución. Con este modelo también se puede anticipar las consecuencias de las decisiones que tome el agente. 
 2. *¿Cuáles fueron las variables que se tomaron al momento de tomar la decisión?*
