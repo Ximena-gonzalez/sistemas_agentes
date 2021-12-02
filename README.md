@@ -47,11 +47,9 @@ Para el protocolo de agentes, se utilizan dos jerarquías, una “mini” jerarq
 
 *“Mini” Jerarquía*
 
-1.- Si hay un semáforo con luz roja frente a ti: prende tus intermitentes
-
-2.- Si hay un semáforo con luz verde frente a ti y tienes tus intermitentes prendidas o tienes tus intermitentes prendidas y no hay nadie frente a ti con intermitentes prendidas: apaga tus intermitentes
-
-3.- Si tienes coches frente a ti con intermitentes prendidas: prende tus intermitentes
+1. Si hay un semáforo con luz roja frente a ti: prende tus intermitentes
+2. Si hay un semáforo con luz verde frente a ti y tienes tus intermitentes prendidas o tienes tus intermitentes prendidas y no hay nadie frente a ti con intermitentes prendidas: apaga tus intermitentes
+3. Si tienes coches frente a ti con intermitentes prendidas: prende tus intermitentes
 
 *Jerarquía Principal*
 
