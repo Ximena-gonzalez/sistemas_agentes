@@ -11,7 +11,8 @@ Clase Robot
 ![plot](./Images/tablasClaseRobot.jpg)
 
 Clase Caja
-TABLA
+
+![plot](./Images/tablasClaseBox.jpg)
 
 ### Protocolo de Agentes:
 1. Sí el robot tiene caja y se encuentra en alguna de las dos celdas contiguas a la celda destino (o sea (1,0) o (0,1)), el robot deposita la caja en la celda destino (0,0)
@@ -30,23 +31,10 @@ Tenemos 3 propuestas de mejora para que el modelo funcione de manera mucho más 
 # Reto: Movilidad Urbana
 ## Diagramas de clase y protocolos de interacción finales.
 Clase Car
-TABLA
 
+![plot](./Images/tablasClaseCar.jpg)
 
-
-Clase Road
-TABLA
-
-
-
-Clase Obstacle
-TABLA
-
-Clase Destination
-TABLA
-
-Clase Traffic_Light
-TABLA
+![plot](./Images/tablasClaseMisc.jpg)
 
 
 ### Protocolo de Agentes
