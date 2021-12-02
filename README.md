@@ -1,4 +1,9 @@
 # Actividad Integradora: Robots
+## Equipo 3
+
+Carolina Ortega Barrios A01025254
+Ian Seidman Sorsby A01028650
+Ximena González Ibarra A01028604
 
 ## Diagramas de Clases:
 Clase Robot
